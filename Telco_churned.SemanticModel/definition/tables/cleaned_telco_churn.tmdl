@@ -1,0 +1,361 @@
+table cleaned_telco_churn
+	lineageTag: 18450771-5b35-4b5a-a367-22dbb7cc11e0
+
+	measure 'Churn Rate' = ```
+			
+			DIVIDE(
+			    CALCULATE(COUNT('cleaned_telco_churn'[Churn]), 'cleaned_telco_churn'[Churn] = "Yes"),
+			    COUNT('cleaned_telco_churn'[Churn])
+			)
+			
+			```
+		lineageTag: 25922d41-579f-4af9-a7d9-7bcb193849e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revenue' = ```
+			SUM(cleaned_telco_churn[MonthlyCharges])
+			
+			```
+		lineageTag: 77621c98-1fc6-487b-8a56-88e547e36bbb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Chuurn rate' = ```
+			
+			DIVIDE(
+			    CALCULATE(COUNT(cleaned_telco_churn[CustomerID]), cleaned_telco_churn[Churn] = "Yes"),
+			    COUNT(cleaned_telco_churn[CustomerID])
+			)
+			
+			```
+		lineageTag: 97fdb1eb-8922-4876-8fe4-6dfe7a9def5e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Churn Count' =
+			
+			CALCULATE(
+			    COUNT(cleaned_telco_churn[customerID]),
+			    cleaned_telco_churn[Churn] = "Yes"
+			)
+		formatString: 0
+		lineageTag: 467253fc-cc10-4de5-84e3-6f43d47eeb2d
+
+	measure 'Churn Rate %' =
+			
+			DIVIDE(
+			    [Churn Count],
+			    COUNT(cleaned_telco_churn[customerID])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 65b31c80-26e2-482e-bbe5-421f991135ca
+
+	measure 'Total Customers' = DISTINCTCOUNT(cleaned_telco_churn[CustomerID])
+		formatString: 0
+		lineageTag: 9b21bed1-0981-40e9-8878-dfcb963f49a0
+
+	measure 'Total Churned' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(cleaned_telco_churn[CustomerID]),
+			    cleaned_telco_churn[Churn] = "Yes"
+			)
+		formatString: 0
+		lineageTag: be40adb6-5b77-48bb-b12e-8cb126f07712
+
+	column customerID
+		dataType: string
+		lineageTag: 097b6930-292e-46e6-b0d6-6dd3ac402652
+		summarizeBy: none
+		sourceColumn: customerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 6d546836-2fc9-4005-b31d-87f2683597e9
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeniorCitizen
+		dataType: int64
+		formatString: 0
+		lineageTag: 545a2396-fae4-4d47-b84f-5a090f7e7b97
+		summarizeBy: sum
+		sourceColumn: SeniorCitizen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Partner
+		dataType: string
+		lineageTag: b1a4eb8f-0026-433a-9419-117882a0b118
+		summarizeBy: none
+		sourceColumn: Partner
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dependents
+		dataType: string
+		lineageTag: 5d7c2f6e-202f-465d-a8e8-8ed1c4ecfa73
+		summarizeBy: none
+		sourceColumn: Dependents
+
+		annotation SummarizationSetBy = Automatic
+
+	column tenure
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e2cfa60-2326-4cd3-b197-7442d3475086
+		summarizeBy: sum
+		sourceColumn: tenure
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"cleaned_telco_churn","TableItemName":"tenure (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column PhoneService
+		dataType: string
+		lineageTag: c2a31e5b-2e73-4215-8c40-ca1676ad373d
+		summarizeBy: none
+		sourceColumn: PhoneService
+
+		annotation SummarizationSetBy = Automatic
+
+	column MultipleLines
+		dataType: string
+		lineageTag: 5fd3e2cd-ae5d-4402-a726-3410033af5ee
+		summarizeBy: none
+		sourceColumn: MultipleLines
+
+		annotation SummarizationSetBy = Automatic
+
+	column InternetService
+		dataType: string
+		lineageTag: 9018839d-253c-4d01-9386-b7d039026bca
+		summarizeBy: none
+		sourceColumn: InternetService
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnlineSecurity
+		dataType: string
+		lineageTag: fee6c7bc-3a21-4397-a709-4fa38852ffec
+		summarizeBy: none
+		sourceColumn: OnlineSecurity
+
+		annotation SummarizationSetBy = Automatic
+
+	column OnlineBackup
+		dataType: string
+		lineageTag: 0e100f47-7000-4b52-b0ea-c04ec67035fc
+		summarizeBy: none
+		sourceColumn: OnlineBackup
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeviceProtection
+		dataType: string
+		lineageTag: 817c23da-f5a1-4749-8c3a-cdc104cae64e
+		summarizeBy: none
+		sourceColumn: DeviceProtection
+
+		annotation SummarizationSetBy = Automatic
+
+	column TechSupport
+		dataType: string
+		lineageTag: 2c6dcc57-d8e0-4770-a75b-e98530a3e4af
+		summarizeBy: none
+		sourceColumn: TechSupport
+
+		annotation SummarizationSetBy = Automatic
+
+	column StreamingTV
+		dataType: string
+		lineageTag: 5a9f174e-854b-4159-ab71-d25204e922f7
+		summarizeBy: none
+		sourceColumn: StreamingTV
+
+		annotation SummarizationSetBy = Automatic
+
+	column StreamingMovies
+		dataType: string
+		lineageTag: 987cbcbe-0179-4c1a-9adb-5297a0e9bb40
+		summarizeBy: none
+		sourceColumn: StreamingMovies
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contract
+		dataType: string
+		lineageTag: 18df69ac-b219-4c5d-8976-e4c48058c251
+		summarizeBy: none
+		sourceColumn: Contract
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaperlessBilling
+		dataType: string
+		lineageTag: e707a33c-0b62-4f8d-8065-f4cf60712c99
+		summarizeBy: none
+		sourceColumn: PaperlessBilling
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: 04e5e2de-4f86-4d6f-b965-f0d4f1c2b28e
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthlyCharges
+		dataType: double
+		lineageTag: 7af03e4e-8b21-4427-a5b9-d00ef7b0cdf3
+		summarizeBy: sum
+		sourceColumn: MonthlyCharges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"cleaned_telco_churn","TableItemName":"MonthlyCharges (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column TotalCharges
+		dataType: double
+		lineageTag: cb744474-9329-4bac-a637-1488e54e4fb2
+		summarizeBy: sum
+		sourceColumn: TotalCharges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Churn
+		dataType: string
+		lineageTag: 2f16f662-7118-4ed5-b0a6-641db8f0be16
+		summarizeBy: none
+		sourceColumn: Churn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MonthlyCharges (bins)' =
+			IF(
+				ISBLANK('cleaned_telco_churn'[MonthlyCharges]),
+				BLANK(),
+				IF(
+					'cleaned_telco_churn'[MonthlyCharges] >= 0,
+					ROUNDDOWN('cleaned_telco_churn'[MonthlyCharges] / 20, 0) * 20,
+					ROUNDUP('cleaned_telco_churn'[MonthlyCharges] / 20, 0) * 20
+				)
+			)
+		lineageTag: 8a5718d6-3358-4a3d-8aaf-209ab71423c2
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "cleaned_telco_churn"
+				          }
+				        },
+				        "Property": "MonthlyCharges"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 20.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"c","Entity":"cleaned_telco_churn"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"MonthlyCharges"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"MonthlyCharges"}},"Size":20.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'tenure (bins)' =
+			IF(
+				ISBLANK('cleaned_telco_churn'[tenure]),
+				BLANK(),
+				INT('cleaned_telco_churn'[tenure] / 12) * 12
+			)
+		formatString: 0
+		lineageTag: 50409074-86ed-40df-b349-b36f541356d5
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "cleaned_telco_churn"
+				          }
+				        },
+				        "Property": "tenure"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 12.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"c","Entity":"cleaned_telco_churn"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"tenure"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"tenure"}},"Size":12.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monthly_Charges_Group =
+			
+			SWITCH(
+			    TRUE(),
+			    cleaned_telco_churn[MonthlyCharges] <= 30, "Low (0-30)",
+			    cleaned_telco_churn[MonthlyCharges] <= 60, "Medium (31-60)",
+			    cleaned_telco_churn[MonthlyCharges] <= 90, "High (61-90)",
+			    "Very High (90+)"
+			)
+		lineageTag: a0b0541d-2921-420e-956b-04e1beee1952
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cleaned_telco_churn = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\ATHARVA\OneDrive\Desktop\Telco\cleaned_telco_churn.csv"),[Delimiter=",", Columns=21, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Use First Row as Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Change Type" = Table.TransformColumnTypes(#"Use First Row as Headers",{{"customerID", type text}, {"gender", type text}, {"SeniorCitizen", Int64.Type}, {"Partner", type text}, {"Dependents", type text}, {"tenure", Int64.Type}, {"PhoneService", type text}, {"MultipleLines", type text}, {"InternetService", type text}, {"OnlineSecurity", type text}, {"OnlineBackup", type text}, {"DeviceProtection", type text}, {"TechSupport", type text}, {"StreamingTV", type text}, {"StreamingMovies", type text}, {"Contract", type text}, {"PaperlessBilling", type text}, {"PaymentMethod", type text}, {"MonthlyCharges", type number}, {"TotalCharges", type number}, {"Churn", type text}}),
+				    #"Trimmed Text" = Table.TransformColumns(Table.TransformColumnTypes(#"Change Type", {{"TotalCharges", type text}}, "en-US"),{{"TotalCharges", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"TotalCharges", Text.Clean, type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Cleaned Text","",null,Replacer.ReplaceValue,{"TotalCharges"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"TotalCharges", type number}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Custom", each try Number.From([TotalCharges]) otherwise null),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", type number}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type1", {"Custom"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each [TotalCharges] <> null and [TotalCharges] <> ""),
+				    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"Custom"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Removed Columns",{{"customerID", type text}})
+				in
+				    #"Changed Type2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

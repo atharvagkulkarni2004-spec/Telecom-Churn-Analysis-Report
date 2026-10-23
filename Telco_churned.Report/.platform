@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Telco_churned"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d5b3b60a-84fd-4988-a977-c4e94fb2ba62"
+  }
+}
